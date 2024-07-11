@@ -1,0 +1,109 @@
+<div id="home-wrapper">
+  <% content_for :head do %>
+    <%= stylesheet_link_tag 'main' %>
+    <%= favicon_link_tag 'logo.webp' %>
+  <% end %>
+
+  <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5 content-spacing fade-in">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img
+          src="./assets/AI-in-Healthcare.webp"
+          class="d-block mx-lg-auto img-fluid"
+          alt="Medical AI"
+          width="900"
+          height="700"
+          loading="lazy"
+        />
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
+          Empowering Healthcare with AI Solutions
+        </h1>
+        <p class="lead">
+          Our platform leverages AI to enhance patient care and streamline
+          medical processes. From medical image analysis to patient-doctor
+          communication, we provide innovative solutions tailored to
+          healthcare professionals.
+        </p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <button
+            type="button"
+            class="btn btn-primary btn-lg px-4 me-md-2"
+            data-bs-toggle="modal"
+            data-bs-target="#helpRequestModal"
+            onclick="window.location.href='/users/sign_in';"
+          >
+            Get Started
+          </button>
+          <div class="row">
+            <div class="col-12 text-center">
+              <%= link_to 'Explore More', explore_path, class: 'btn btn-outline-secondary btn-lg px-4', role: 'button' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div id="explore" class="row feature-section py-5">
+      <div class="col-lg-4">
+        <div class="feature-item">
+          <i class="fas fa-brain fa-3x mb-3"></i>
+          <h3>Advanced AI</h3>
+          <p>Harnessing the power of advanced AI algorithms to provide accurate and efficient solutions.</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="feature-item">
+          <i class="fas fa-stethoscope fa-3x mb-3"></i>
+          <h3>Medical Expertise</h3>
+          <p>Combining AI technology with medical expertise to deliver reliable healthcare services.</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="feature-item">
+          <i class="fas fa-users fa-3x mb-3"></i>
+          <h3>Patient-Centered</h3>
+          <p>Focusing on patient care and enhancing the healthcare experience for everyone.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="row testimonials-section py-5">
+      <div class="col-12">
+        <h2 class="text-center">What Our Clients Say</h2>
+        <div class="testimonial">
+          <p>"HealthBridge-AI has transformed our medical imaging process. The accuracy and speed are unmatched!"</p>
+          <p class="text-end">- Dr. Sarah Johnson</p>
+        </div>
+        <div class="testimonial">
+          <p>"The AI consultation service has been invaluable for our clinic. Highly recommend!"</p>
+          <p class="text-end">- Dr. Michael Brown</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action Section -->
+    <div id="contact" class="row cta-section py-5">
+      <div class="row mt-4">
+        <div class="col-12 text-center">
+          <h2>Ready to revolutionize your healthcare services?</h2>
+          <%= link_to 'Contact Us Today', contact_path, class: 'btn btn-primary btn-lg', role: 'button' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <span class="text-muted">© 2024 Luminamedix. All rights reserved.</span>
+    </div>
+  </footer>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+</div>

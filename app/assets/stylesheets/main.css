@@ -1,0 +1,155 @@
+body {
+  background-image: url('land.png');
+  color: #eee;
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(50px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.8); /* Adjust the alpha value for transparency */
+  backdrop-filter: blur(10px); /* Adds a blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+}
+
+.navbar-brand {
+  margin-right: 50px;
+  font-weight: 500;
+  color: #ffffff; /* Adjust text color for better visibility */
+}
+
+.navbar-toggler-icon {
+  filter: brightness(0) invert(1); /* Invert navbar toggler icon color */
+}
+
+.nav-link {
+  color: #fff !important; /* Navbar link text color */
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+  font-weight: 600; /* Active link font weight */
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+.btn-outline-secondary {
+  color: #007bff;
+  border-color: #007bff;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #f8f9fa; /* Lighter background on hover */
+}
+
+.footer {
+  color: #fff;
+  background-color: #1e1e1f;
+  text-align: center;
+  padding: 10px 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #323250; /* Light border on top */
+}
+
+.content-spacing {
+  margin-top: 50px;
+}
+
+.content-spacing .col-lg-6 {
+  margin-bottom: 30px;
+}
+
+.content-spacing img {
+  margin-bottom: 30px;
+}
+
+@media (min-width: 992px) {
+  .content-spacing .col-lg-6 {
+    margin-bottom: 0;
+  }
+
+  .content-spacing img {
+    margin-bottom: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* New styles for features, testimonials, and CTA sections */
+.feature-section, .testimonials-section, .cta-section {
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.feature-item {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.feature-item i {
+  color: #007bff;
+}
+
+.feature-item h3 {
+  margin-top: 10px;
+  color: #fff;
+}
+
+.feature-item p {
+  color: #ccc;
+}
+
+.testimonials-section h2, .cta-section h2 {
+  color: #fff;
+}
+
+.testimonial {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+
+.testimonial p {
+  color: #ccc;
+}
+
+.testimonial p.text-end {
+  color: #fff;
+}
+
+.cta-section {
+  margin-top: 50px;
+}
+
+.cta-section button {
+  margin-top: 20px;
+}

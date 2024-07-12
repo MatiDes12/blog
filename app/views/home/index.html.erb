@@ -44,74 +44,58 @@
         </div>
     </div>
 
-    <div class="modal fade" id="demoModal" tabindex="-1" aria-labelledby="demoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="demoModalLabel">Exclusive AI Consultation Request</h5>
-                <button type="button" class="btn-close close custom-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
-
-            </div>
-            <div class="modal-body">
-                <form id="demoRequestForm" class="needs-validation" novalidate>
-                    <div class="mb-3">
-                        <label for="fullName" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
-                        <div class="invalid-feedback">Please enter your full name.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="emailAddress" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="emailAddress" placeholder="Enter your email address" required>
-                        <div class="invalid-feedback">Please enter a valid email address.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="organizationName" class="form-label">Organization</label>
-                        <input type="text" class="form-control" id="organizationName" placeholder="Enter your organization name" required>
-                        <div class="invalid-feedback">Please enter your organization name.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="userRole" class="form-label">Your Role</label>
-                        <select class="form-select" id="userRole" required>
-                            <option value="">Select your role</option>
-                            <option value="Physician">Physician</option>
-                            <option value="Radiologist">Radiologist</option>
-                            <option value="Administrator">Hospital Administrator</option>
-                            <option value="ITManager">IT Manager</option>
-                            <option value="Consultant">Healthcare Consultant</option>
-                            <option value="Nurse">Nurse</option>
-                            <option value="Researcher">Medical Researcher</option>
-                            <option value="Other">Other Healthcare Professional</option>
-                        </select>
-                        <div class="invalid-feedback">Please select your role.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Areas of Interest</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="diagnosticAI" id="diagnosticAI">
-                            <label class="form-check-label" for="diagnosticAI">Diagnostic AI</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="predictiveAnalytics" id="predictiveAnalytics">
-                            <label class="form-check-label" for="predictiveAnalytics">Predictive Analytics</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="clinicalSupport" id="clinicalSupport">
-                            <label class="form-check-label" for="clinicalSupport">Clinical Decision Support</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="patientEngagement" id="patientEngagement">
-                            <label class="form-check-label" for="patientEngagement">Patient Engagement</label>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="additionalNotes" class="form-label">Additional Notes</label>
-                        <textarea class="form-control" id="additionalNotes" rows="3" placeholder="Any specific requests or notes"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Request Demo</button>
-                </form>
-            </div>
-        </div>
+<div class="modal fade" id="demoModal" tabindex="-1" aria-labelledby="demoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="demoModalLabel">Exclusive AI Consultation Request</h5>
+        <button type="button" class="btn-close close custom-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with model: DemoRequest.new, url: demo_requests_path, local: true, html: { id: 'demoRequestForm', class: 'needs-validation', novalidate: true } do |f| %>
+          <div class="mb-3">
+            <%= f.label :full_name, class: 'form-label' %>
+            <%= f.text_field :full_name, class: 'form-control', placeholder: 'Enter your full name', required: true %>
+            <div class="invalid-feedback">Please enter your full name.</div>
+          </div>
+          <div class="mb-3">
+            <%= f.label :email, 'Email Address', class: 'form-label' %>
+            <%= f.email_field :email, class: 'form-control', placeholder: 'Enter your email address', required: true %>
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+          </div>
+          <div class="mb-3">
+            <%= f.label :organization, 'Organization', class: 'form-label' %>
+            <%= f.text_field :organization, class: 'form-control', placeholder: 'Enter your organization name', required: true %>
+            <div class="invalid-feedback">Please enter your organization name.</div>
+          </div>
+          <div class="mb-3">
+            <%= f.label :role, 'Your Role', class: 'form-label' %>
+            <%= f.select :role, ['Physician', 'Radiologist', 'Hospital Administrator', 'IT Manager', 'Healthcare Consultant', 'Nurse', 'Medical Researcher', 'Other Healthcare Professional'], { prompt: 'Select your role' }, class: 'form-select', required: true %>
+            <div class="invalid-feedback">Please select your role.</div>
+          </div>
+          <div class="mb-3">
+            <%= f.label :areas_of_interest, 'Areas of Interest', class: 'form-label' %></br>
+            <%= f.check_box :areas_of_interest, { multiple: true }, 'Diagnostic AI', 'Diagnostic AI' %>
+            <%= f.label :areas_of_interest, 'Diagnostic AI', class: 'form-check-label' %></br>
+            <%= f.check_box :areas_of_interest, { multiple: true }, 'Predictive Analytics', 'Predictive Analytics' %>
+            <%= f.label :areas_of_interest, 'Predictive Analytics', class: 'form-check-label' %></br>
+            <%= f.check_box :areas_of_interest, { multiple: true }, 'Clinical Decision Support', 'Clinical Decision Support' %>
+            <%= f.label :areas_of_interest, 'Clinical Decision Support', class: 'form-check-label' %></br>
+            <%= f.check_box :areas_of_interest, { multiple: true }, 'Patient Engagement', 'Patient Engagement' %>
+            <%= f.label :areas_of_interest, 'Patient Engagement', class: 'form-check-label' %></br>
+          </div>
+          <div class="mb-3">
+            <%= f.label :additional_notes, 'Additional Notes', class: 'form-label' %>
+            <%= f.text_area :additional_notes, class: 'form-control', rows: 3, placeholder: 'Any specific requests or notes' %>
+          </div>
+          <%= f.submit 'Request Demo', class: 'btn btn-primary w-100' %>
+        <% end %>
+      </div>
     </div>
+  </div>
+</div>
+
+
 </div>
 
 

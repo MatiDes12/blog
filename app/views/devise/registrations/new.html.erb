@@ -1,61 +1,123 @@
-<div class="form-wrapperup">
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'needs-validation', novalidate: true }) do |f| %>
-    <!-- Rest of your form code -->
-    <h1>Create Your Account</h1>
-    <div class="row mb-3">
-      <div class="col">
-        <%= f.text_field :fname, placeholder: "First Name", class: "form-control", required: true %>
-      </div>
-      <div class="col">
-        <%= f.text_field :lname, placeholder: "Last Name", class: "form-control", required: true %>
-      </div>
-    </div>
 
-    <div class="row mb-3">
-      <div class="col">
-        <%= f.email_field :email, placeholder: "Email", class: "form-control mb-3", required: true %>
-      </div>
-      <div class="col">
-        <%= f.password_field :password, placeholder: "Password", class: "form-control mb-3", required: true %>
-      </div>
-      <div class="col">
-        <%= f.password_field :password_confirmation, placeholder: "Password Confirmation", class: "form-control mb-3", required: true %>
-      </div>
+<div class="main">
+<!-- Sign up form -->
+<section class="signup">
+    <div class="container">
+        <div class="signup-content">
+            <div class="signup-form">
+                <h2 class="form-title">
+                <span class="lmdx">L</span>umina<span class="lmdx">M</span>edix
+                </h2>
+                <form method="POST" class="register-form" id="register-form">
+                    <div class="form-group">
+                        <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        <input type="text" name="name" id="name" placeholder="Your Name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><i class="zmdi zmdi-email"></i></label>
+                        <input type="email" name="email" id="email" placeholder="Your Email"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                        <input type="password" name="pass" id="pass" placeholder="Password"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                        <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                        <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service" data-bs-toggle="modal" data-bs-target="#termsModal">Terms of service</a></label>
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                    </div>
+                </form>
+            </div>
+            <div class="signup-image">
+                <figure><img src="/assets/signup-image.jpg" alt="sing up image"></figure>
+                <a href="#" class="signup-image-link">I am already member</a>
+            </div>
+        </div>
     </div>
-
-    <div class="row mb-3">
-      <div class="col">
-        <%= f.text_field :phone, placeholder: "Phone Number", class: "form-control", required: true %>
-      </div>
-      <div class="col">
-        <%= f.date_field :date_of_birth, placeholder: "Date of Birth", class: "form-control", required: true %>
-      </div>
-    </div>
-    <%= f.text_field :address, placeholder: "Address", class: "form-control mb-3", required: true %>
-    <div class="row mb-3">
-      <div class="col">
-        <%= f.text_field :city, placeholder: "City", class: "form-control", required: true %>
-      </div>
-      <div class="col">
-        <%= f.text_field :state, placeholder: "State", class: "form-control", required: true %>
-      </div>
-      <div class="col">
-        <%= f.text_field :postal_code, placeholder: "Postal Code", class: "form-control", required: true %>
-      </div>
-    </div>
-    <%= f.select :gender, options_for_select([['Male', 'male'], ['Female', 'female'], ['Other', 'other']]), { include_blank: 'Gender' }, class: 'form-control mb-3', required: true %>
-    <%= f.text_area :medical_history, placeholder: "Medical History", rows: 4, class: "form-control mb-3", required: true %>
-    
-    <% if flash[:alert] %>
-    <div class="alert alert-warning">
-      <%= flash[:alert] %>
-    </div>
-  <% end %>
-    
-    <div class="actions">
-      <%= f.submit "SIGN UP", class: "btn btn-primary" %>
-    </div>
-  <% end %>
-  <%= render "devise/shared/links" %>
+</section>
 </div>
+
+<!-- Terms of Service Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">Terms of Service</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Effective Date:</strong> [7/12/2024]</p>
+
+                <h6>1. Acceptance of Terms</h6>
+                <p>By accessing and using the LuminaMedix platform, you agree to comply with and be bound by the following Terms of Service. If you do not agree with these terms, you are prohibited from using the platform.</p>
+
+                <h6>2. Description of Service</h6>
+                <p>LuminaMedix provides users with access to advanced medical AI services, including but not limited to appointment scheduling, AI-driven medical advice, and patient data management. The service is provided on a subscription basis and may include different tiers of service with varying features and limitations.</p>
+
+                <h6>3. User Accounts</h6>
+                <p>To use certain features of the service, you must register for an account. You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account. You agree to provide accurate and complete information during the registration process and to keep your account information up to date.</p>
+
+                <h6>4. User Responsibilities</h6>
+                <p>Users agree to use the service only for lawful purposes and in accordance with these terms. You agree not to use the service to:</p>
+                <ul>
+                    <li>Violate any applicable local, state, national, or international law.</li>
+                    <li>Transmit any unsolicited or unauthorized advertising, promotional materials, or spam.</li>
+                    <li>Engage in any other conduct that restricts or inhibits anyone's use or enjoyment of the service.</li>
+                    <li>Upload or transmit any content that is unlawful, harmful, threatening, abusive, harassing, defamatory, vulgar, obscene, or otherwise objectionable.</li>
+                    <li>Impersonate any person or entity or falsely state or otherwise misrepresent your affiliation with a person or entity.</li>
+                    <li>Interfere with or disrupt the service or servers or networks connected to the service.</li>
+                </ul>
+
+                <h6>5. Privacy and Data Security</h6>
+                <p>Your privacy is important to us. Please review our Privacy Policy, which governs the use of your personal information. We implement security measures to protect your data but cannot guarantee its absolute security. You agree to notify us immediately of any unauthorized use of your account or any other breach of security.</p>
+
+                <h6>6. Intellectual Property</h6>
+                <p>All content, including but not limited to text, graphics, logos, and software, is the property of LuminaMedix or its content suppliers and is protected by intellectual property laws. You agree not to reproduce, duplicate, copy, sell, resell, or exploit any portion of the service without our express written permission.</p>
+
+                <h6>7. Modifications to Service</h6>
+                <p>We reserve the right to modify or discontinue the service, temporarily or permanently, with or without notice to you. We will not be liable to you or any third party for any modification, suspension, or discontinuance of the service. We may also impose limits on certain features and services or restrict your access to parts or all of the service without notice or liability.</p>
+
+                <h6>8. Termination</h6>
+                <p>We may terminate or suspend your account and access to the service at our sole discretion, without prior notice, for conduct that we believe violates these Terms of Service or is harmful to other users of the service, us, or third parties, or for any other reason. Upon termination, your right to use the service will immediately cease. If you wish to terminate your account, you may do so by contacting us at [Insert Contact Information].</p>
+
+                <h6>9. Disclaimer of Warranties</h6>
+                <p>The service is provided "as is" and "as available" without warranties of any kind, either express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, or non-infringement. We do not warrant that the service will be uninterrupted, timely, secure, or error-free, or that any defects in the service will be corrected.</p>
+
+                <h6>10. Limitation of Liability</h6>
+                <p>In no event shall LuminaMedix be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses, resulting from:</p>
+                <ul>
+                    <li>Your use of or inability to use the service;</li>
+                    <li>Any unauthorized access to or use of our servers and/or any personal information stored therein;</li>
+                    <li>Any interruption or cessation of transmission to or from our services;</li>
+                    <li>Any bugs, viruses, Trojan horses, or the like that may be transmitted to or through our services by any third party;</li>
+                    <li>Any errors or omissions in any content or for any loss or damage incurred as a result of your use of any content posted, emailed, transmitted, or otherwise made available through the service.</li>
+                </ul>
+
+                <h6>11. Indemnification</h6>
+                <p>You agree to indemnify, defend, and hold harmless LuminaMedix, its affiliates, officers, directors, employees, and agents from and against any and all claims, liabilities, damages, losses, costs, expenses, or fees (including reasonable attorneys' fees) that such parties may incur as a result of or arising from your use of the service, your violation of these Terms of Service, or your violation of any rights of another.</p>
+
+                <h6>12. Governing Law</h6>
+                <p>These Terms of Service shall be governed by and construed in accordance with the laws of the jurisdiction in which LuminaMedix is established, without regard to its conflict of law principles. You agree to submit to the personal and exclusive jurisdiction of the courts located within that jurisdiction.</p>
+
+                <h6>13. Changes to the Terms of Service</h6>
+                <p>We may revise these terms from time to time. The most current version will always be posted on our website. By continuing to access or use the service after those revisions become effective, you agree to be bound by the revised terms.</p>
+
+                <h6>14. Contact Information</h6>
+                <p>If you have any questions about these Terms of Service, please contact us at [lmdx@LuminaMedix.com].</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>

@@ -1,109 +1,435 @@
-<div id="home-wrapper">
-  <% content_for :head do %>
+<% content_for :head do %>
     <%= stylesheet_link_tag 'main' %>
     <%= favicon_link_tag 'logo.webp' %>
   <% end %>
 
-  <div class="container col-xxl-8 px-4 py-5">
-    <div class="row flex-lg-row-reverse align-items-center g-5 py-5 content-spacing fade-in">
-      <div class="col-10 col-sm-8 col-lg-6">
-        <img
-          src="./assets/AI-in-Healthcare.webp"
-          class="d-block mx-lg-auto img-fluid"
-          alt="Medical AI"
-          width="900"
-          height="700"
-          loading="lazy"
-        />
-      </div>
-      <div class="col-lg-6">
-        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
-          Empowering Healthcare with AI Solutions
-        </h1>
-        <p class="lead">
-          Our platform leverages AI to enhance patient care and streamline
-          medical processes. From medical image analysis to patient-doctor
-          communication, we provide innovative solutions tailored to
-          healthcare professionals.
-        </p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-          <button
-            type="button"
-            class="btn btn-primary btn-lg px-4 me-md-2"
-            data-bs-toggle="modal"
-            data-bs-target="#helpRequestModal"
-            onclick="window.location.href='/users/sign_in';"
-          >
-            Get Started
-          </button>
-          <div class="row">
-            <div class="col-12 text-center">
-              <%= link_to 'Explore More', explore_path, class: 'btn btn-outline-secondary btn-lg px-4', role: 'button' %>
+<!-- Chatbot Modal -->
+    <div class="modal fade" id="chatbotModal" tabindex="-1" aria-labelledby="chatbotModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-custom-width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="chatbotModalLabel">AV Assistant</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Chat area where messages will be displayed -->
+                    <div id="chatArea"
+                        style=" overflow-y: auto; background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                        <!-- Chat messages will be appended here -->
+                    </div>
+                    <!-- Input area for typing messages -->
+                    <textarea id="chatInput" class="form-control" placeholder="Ask AV Assistant..." rows="3"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="clearChat">Clear</button>
+                    <button type="button" class="btn btn-primary" onclick="sendMessage()">Send</button>
+                </div>
             </div>
-          </div>
+        </div>
+    </div>
+
+    <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+            <img src="./assets/lmdx.png" class="d-block mx-lg-auto img-fluid" alt="Healthcare Technology" width="700" height="500" loading="lazy">
+        </div>
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Innovative Healthcare Solutions with AI</h1>
+            <p class="lead">LuminaMedix (LMDX) leverages advanced AI technologies, including deep learning and machine learning, to revolutionize healthcare. Our solutions empower medical professionals with predictive analytics and image analysis capabilities for early disease detection and personalized patient care.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" data-bs-toggle="modal" data-bs-target="#demoModal">Request a Demo</button>
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4">Contact Us</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Advanced Demo Request Modal -->
+<div class="modal fade" id="demoModal" tabindex="-1" aria-labelledby="demoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="demoModalLabel">Experience the Future of AI-Powered Healthcare</h4>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 info-section">
+                        <h2>Why Choose LuminaMedix?</h2>
+                        <p>Discover the benefits of using LuminaMedix for your healthcare needs:</p>
+                        <div class="icon-text">
+                            <i class="bi bi-graph-up-arrow"></i>
+                            <p>Advanced Image Analysis: Utilize cutting-edge AI for precise diagnostics.</p>
+                        </div>
+                        <div class="icon-text">
+                            <i class="bi bi-bar-chart"></i>
+                            <p>Predictive Analytics: Proactively manage patient care with predictive insights.</p>
+                        </div>
+                        <div class="icon-text">
+                            <i class="bi bi-lightning"></i>
+                            <p>Real-time Decision Support: Make informed decisions with real-time AI assistance.</p>
+                        </div>
+                        <div class="icon-text">
+                            <i class="bi bi-link-45deg"></i>
+                            <p>Seamless Integration: Easily integrate with existing healthcare systems.</p>
+                        </div>
+                        <div class="icon-text">
+                            <i class="bi bi-shield-lock"></i>
+                            <p>HIPAA Compliant: Ensure data security and compliance with HIPAA standards.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="mb-4">Schedule Your Personalized Demo</h4>
+                        <form id="aiDemoForm" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Work Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your work email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="organization" class="form-label">Healthcare Organization</label>
+                                <input type="text" class="form-control" id="organization" placeholder="Enter your organization" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="role" class="form-label">Your Role</label>
+                                <select class="form-select" id="role" required>
+                                    <option value="">Select your role</option>
+                                    <option>Physician</option>
+                                    <option>Radiologist</option>
+                                    <option>Hospital Administrator</option>
+                                    <option>IT Manager</option>
+                                    <option>Healthcare Consultant</option>
+                                    <option>Nurse</option>
+                                    <option>Medical Researcher</option>
+                                    <option>Other Healthcare Professional</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Areas of Interest (Select all that apply)</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="diagnosticAI" id="diagnosticAI">
+                                    <label class="form-check-label" for="diagnosticAI">Diagnostic AI</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="predictiveAnalytics" id="predictiveAnalytics">
+                                    <label class="form-check-label" for="predictiveAnalytics">Predictive Analytics</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="clinicalDecisionSupport" id="clinicalDecisionSupport">
+                                    <label class="form-check-label" for="clinicalDecisionSupport">Clinical Decision Support</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="patientEngagement" id="patientEngagement">
+                                    <label class="form-check-label" for="patientEngagement">Patient Engagement</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Schedule My AI-Powered Demo</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Form validation
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })();
+</script>
+
+
+
+
+
+<div class="container px-4 py-5" id="custom-cards">
+  <h2 class="pb-2 border-bottom">Medical Image Analysis Services</h2>
+
+  <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+    <div class="col">
+      <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('./assets/system_high.png');">
+        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+          <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Pneumonia Classification</h3>
+          <ul class="d-flex list-unstyled mt-auto">
+            <li class="me-auto">
+              <img src="./assets/doctor1.png" alt="Doctor Profile" width="32" height="32" class="rounded-circle border border-white">
+            </li>
+            <li class="d-flex align-items-center me-3">
+              <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
+              <small>Pneumonia Imaging</small>
+            </li>
+            <li class="d-flex align-items-center">
+              <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
+              <small>2d</small>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
 
-    <!-- Features Section -->
-    <div id="explore" class="row feature-section py-5">
-      <div class="col-lg-4">
-        <div class="feature-item">
-          <i class="fas fa-brain fa-3x mb-3"></i>
-          <h3>Advanced AI</h3>
-          <p>Harnessing the power of advanced AI algorithms to provide accurate and efficient solutions.</p>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="feature-item">
-          <i class="fas fa-stethoscope fa-3x mb-3"></i>
-          <h3>Medical Expertise</h3>
-          <p>Combining AI technology with medical expertise to deliver reliable healthcare services.</p>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="feature-item">
-          <i class="fas fa-users fa-3x mb-3"></i>
-          <h3>Patient-Centered</h3>
-          <p>Focusing on patient care and enhancing the healthcare experience for everyone.</p>
+    <div class="col">
+      <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('./assets/system_high.png');">
+        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+          <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Cardiac Detection</h3>
+          <ul class="d-flex list-unstyled mt-auto">
+            <li class="me-auto">
+              <img src="./assets/doctor2.png" alt="Doctor Profile" width="32" height="32" class="rounded-circle border border-white">
+            </li>
+            <li class="d-flex align-items-center me-3">
+              <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
+              <small>Cardiac Imaging</small>
+            </li>
+            <li class="d-flex align-items-center">
+              <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
+              <small>3d</small>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
 
-    <!-- Testimonials Section -->
-    <div class="row testimonials-section py-5">
-      <div class="col-12">
-        <h2 class="text-center">What Our Clients Say</h2>
-        <div class="testimonial">
-          <p>"HealthBridge-AI has transformed our medical imaging process. The accuracy and speed are unmatched!"</p>
-          <p class="text-end">- Dr. Sarah Johnson</p>
-        </div>
-        <div class="testimonial">
-          <p>"The AI consultation service has been invaluable for our clinic. Highly recommend!"</p>
-          <p class="text-end">- Dr. Michael Brown</p>
+    <div class="col">
+      <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('./assets/system_high.png');">
+        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+          <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Atrium Segmentation</h3>
+          <ul class="d-flex list-unstyled mt-auto">
+            <li class="me-auto">
+              <img src="./assets/doctor3.png" alt="Doctor Profile" width="32" height="32" class="rounded-circle border border-white">
+            </li>
+            <li class="d-flex align-items-center me-3">
+              <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
+              <small>Atrium  Imaging</small>
+            </li>
+            <li class="d-flex align-items-center">
+              <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
+              <small>4d</small>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
 
-    <!-- Call to Action Section -->
-    <div id="contact" class="row cta-section py-5">
-      <div class="row mt-4">
-        <div class="col-12 text-center">
-          <h2>Ready to revolutionize your healthcare services?</h2>
-          <%= link_to 'Contact Us Today', contact_path, class: 'btn btn-primary btn-lg', role: 'button' %>
+    <div class="col">
+      <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('./assets/system_high.png');">
+        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+          <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Lung Tumor Segmentation</h3>
+          <ul class="d-flex list-unstyled mt-auto">
+            <li class="me-auto">
+              <img src="./assets/doctor4.png" alt="Doctor Profile" width="32" height="32" class="rounded-circle border border-white">
+            </li>
+            <li class="d-flex align-items-center me-3">
+              <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
+              <small>Lung Tumor Imaging</small>
+            </li>
+            <li class="d-flex align-items-center">
+              <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
+              <small>5d</small>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('./assets/system_high.png');">
+        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+          <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Liver Tumor Segmentation</h3>
+          <ul class="d-flex list-unstyled mt-auto">
+            <li class="me-auto">
+              <img src="./assets/doctor5.png" alt="Doctor Profile" width="32" height="32" class="rounded-circle border border-white">
+            </li>
+            <li class="d-flex align-items-center me-3">
+              <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
+              <small>Liver Tumor Imaging</small>
+            </li>
+            <li class="d-flex align-items-center">
+              <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
+              <small>6d</small>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('./assets/system_high.png');">
+        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+          <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Medical Image Analysis Summary</h3>
+          <ul class="d-flex list-unstyled mt-auto">
+            <li class="me-auto">
+              <img src="./assets/doctor6.png" alt="Doctor Profile" width="32" height="32" class="rounded-circle border border-white">
+            </li>
+            <li class="d-flex align-items-center me-3">
+              <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
+              <small>Medical Imaging</small>
+            </li>
+            <li class="d-flex align-items-center">
+              <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
+              <small>7d</small>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
-
-  <footer class="footer">
-    <div class="container">
-      <span class="text-muted">© 2024 Luminamedix. All rights reserved.</span>
-    </div>
-  </footer>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"
-  ></script>
 </div>
+
+
+
+
+
+
+<div class="container px-4 py-5" id="featured-3">
+    <h2 class="pb-2 border-bottom">Our Services</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <img src="./assets/cpu-fill.svg" width="25" alt="cpu-fill">
+            </div>
+            <h3 class="fs-2 text-body-emphasis">AI-Powered Predictive Analytics</h3>
+            <p>Utilize our AI-driven predictive analytics to forecast patient outcomes, optimize treatment plans, and enhance preventive care strategies, ensuring better health management.</p>
+            <a href="#" class="icon-link">
+                Learn More
+                <img src="./assets/chevron-compact-right.svg" width="25" alt="chevron" class="chevron">
+            </a>
+        </div>
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <img src="./assets/people.svg" width="25" alt="people">
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Enhanced Patient Engagement</h3>
+            <p>Boost patient engagement with our AI-enhanced communication tools, including personalized health tips, automated follow-ups, and multilingual support for diverse patient populations.</p>
+            <a href="#" class="icon-link">
+                Contact Us
+                <img src="./assets/chevron-compact-right.svg" width="25" alt="chevron" class="chevron">
+            </a>
+        </div>
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <img src="./assets/calendar.svg" width="25" alt="calendar">
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Smart Appointment Management</h3>
+            <p>Revolutionize your scheduling with our AI-powered system that not only books appointments but also predicts patient no-shows and optimizes clinic workflows for maximum efficiency.</p>
+            <a href="#" class="icon-link">
+                Schedule Now
+                <img src="./assets/chevron-compact-right.svg" width="25" alt="chevron" class="chevron">
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container px-4 py-5" id="hanging-icons">
+    <h2 class="pb-2 border-bottom">Our Team</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-body-emphasis bg-body-tertiary rounded-3 mb-3">
+                <img src="./assets/people-fill.svg" width="25" alt="team-member">
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Dr. Alaric Voss</h3>
+            <p>Dr. Alaric Voss is a leading AI specialist with over 15 years of experience in medical image analysis. He has pioneered several AI-driven diagnostic tools that are now widely used in hospitals worldwide.</p>
+            <a href="#" class="icon-link">
+                Contact
+                <img src="./assets/chevron-compact-right.svg" width="25" alt="chevron" class="chevron">
+            </a>
+        </div>
+        
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-body-emphasis bg-body-tertiary rounded-3 mb-3">
+                <img src="./assets/people-fill.svg" width="25" alt="team-member">
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Dr. Elara Quinn</h3>
+            <p>Dr. Elara Quinn is an expert in AI-enhanced patient communication, with a focus on developing multilingual support systems. Her work has significantly improved patient engagement and satisfaction.</p>
+            <a href="#" class="icon-link">
+                Contact
+                <img src="./assets/chevron-compact-right.svg" width="25" alt="chevron" class="chevron">
+            </a>
+        </div>
+
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-body-emphasis bg-body-tertiary rounded-3 mb-3">
+                <img src="./assets/people-fill.svg" width="25" alt="team-member">
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Dr. Leif Anders</h3>
+            <p>Dr. Leif Anders is a senior AI researcher specializing in predictive analytics and smart appointment management. His innovations have optimized clinic workflows and reduced patient wait times.</p>
+            <a href="#" class="icon-link">
+                Contact
+                <img src="./assets/chevron-compact-right.svg" width="25" alt="chevron" class="chevron">
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="footer-container">
+    <div class="container">
+        <footer class="py-5">
+            <div class="row">
+                <div class="col-6 col-md-2 mb-3">
+                    <h5>Quick Links</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Our Services</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">AI Solutions</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">About Us</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-md-2 mb-3">
+                    <h5>Resources</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Blog</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Case Studies</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Privacy Policy</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-5 offset-md-1 mb-3">
+                    <form>
+                        <h5>Stay Updated on AI in Healthcare</h5>
+                        <p>Subscribe to our newsletter for the latest in AI-driven healthcare solutions.</p>
+                        <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                            <label for="newsletter1" class="visually-hidden">Email address</label>
+                            <input id="newsletter1" type="email" class="form-control" placeholder="Enter your email">
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+                <p>© 2024 LuminaMedix. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="./js/main.js"></script>

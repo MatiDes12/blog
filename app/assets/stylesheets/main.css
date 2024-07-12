@@ -1,155 +1,264 @@
-body {
-  background-image: url('land.png');
-  color: #eee;
-  backdrop-filter: blur(100px);
-  -webkit-backdrop-filter: blur(50px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
-
 .navbar {
   position: fixed;
   width: 100%;
   z-index: 1;
-  background-color: rgba(0, 0, 0, 0.8); /* Adjust the alpha value for transparency */
-  backdrop-filter: blur(10px); /* Adds a blur effect */
-  -webkit-backdrop-filter: blur(10px); /* For Safari */
 }
 
 .navbar-brand {
   margin-right: 50px;
   font-weight: 500;
-  color: #ffffff; /* Adjust text color for better visibility */
-}
-
-.navbar-toggler-icon {
-  filter: brightness(0) invert(1); /* Invert navbar toggler icon color */
-}
-
-.nav-link {
-  color: #fff !important; /* Navbar link text color */
-}
-
-.navbar-dark .navbar-nav .nav-link.active {
-  font-weight: 600; /* Active link font weight */
 }
 
 .btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-  transition: background-color 0.3s ease-in-out;
+  color: white;
+  /* Ensures text color is white */
+  display: inline-flex;
+  /* Aligns items inline and centers them */
+  align-items: center;
+  /* Vertical alignment */
+  justify-content: center;
+  /* Horizontal alignment */
+  cursor: pointer;
 }
 
-.btn-primary:hover {
-  background-color: #0056b3; /* Darker shade on hover */
+.navbar-brand img {
+  margin-right: 5px;
+  /* filter: invert(27%) sepia(99%) saturate(6497%) hue-rotate(211deg) brightness(91%) contrast(92%); */
 }
 
-.btn-outline-secondary {
-  color: #007bff;
-  border-color: #007bff;
-  transition: background-color 0.3s ease-in-out;
+.btn-primary img {
+  margin-left: 8px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+  display: inline-block;
+  vertical-align: middle;
 }
 
-.btn-outline-secondary:hover {
-  background-color: #f8f9fa; /* Lighter background on hover */
+.feature-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 25%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
-.footer {
-  color: #fff;
-  background-color: #1e1e1f;
-  text-align: center;
-  padding: 10px 0;
-  position: absolute;
+.feature-icon img {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+.icon-link .chevron {
+  vertical-align: sub;
+  width: 17px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+}
+
+/* .card-cover {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+} */
+
+.card:hover {
+  transform: scale(1.05);
+  /* Slightly enlarge the card */
+  transition: transform .3s ease, box-shadow .3s ease;
+  /* Smooth transition for scale and shadow */
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, .3);
+  /* Increase shadow size */
+}
+
+/* Ensure the card's content scales properly */
+.card-cover {
+  transition: transform .3s ease, box-shadow .3s ease;
+  /* Apply smooth transition for hover effects */
+}
+
+.footer-container {
   bottom: 0;
   width: 100%;
-  border-top: 1px solid #323250; /* Light border on top */
-}
-
-.content-spacing {
-  margin-top: 50px;
-}
-
-.content-spacing .col-lg-6 {
-  margin-bottom: 30px;
-}
-
-.content-spacing img {
-  margin-bottom: 30px;
-}
-
-@media (min-width: 992px) {
-  .content-spacing .col-lg-6 {
-    margin-bottom: 0;
-  }
-
-  .content-spacing img {
-    margin-bottom: 0;
-  }
-}
-
-.fade-in {
-  animation: fadeIn 2s ease-in-out;
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-/* New styles for features, testimonials, and CTA sections */
-.feature-section, .testimonials-section, .cta-section {
-  background-color: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  padding: 20px;
-  margin-top: 20px;
-}
-
-.feature-item {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.feature-item i {
-  color: #007bff;
-}
-
-.feature-item h3 {
-  margin-top: 10px;
-  color: #fff;
-}
-
-.feature-item p {
-  color: #ccc;
-}
-
-.testimonials-section h2, .cta-section h2 {
-  color: #fff;
-}
-
-.testimonial {
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 20px;
-  margin: 10px 0;
+  height: 10%;
+  background-color: #f5f5f5;
   border-radius: 10px;
 }
 
-.testimonial p {
-  color: #ccc;
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
 }
 
-.testimonial p.text-end {
-  color: #fff;
+.footer a {
+  color: #333;
+  text-decoration: none;
 }
 
-.cta-section {
-  margin-top: 50px;
+
+
+#chatArea {
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  padding: 10px;
+  overflow-y: auto;
+  height: 600px;
 }
 
-.cta-section button {
-  margin-top: 20px;
+.modal-custom-width {
+  max-width: 700px; /* Customize this value */
+}
+
+
+.message {
+  padding: 8px 12px;
+  border-radius: 18px;
+  margin-bottom: 10px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.sent {
+  background-color: #007bff;
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 2px;
+}
+
+.received {
+  background-color: #e9ecef;
+  color: black;
+  margin-right: auto;
+  border-bottom-left-radius: 2px;
+}
+
+.dot-flashing {
+  float: left;
+
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  margin: 0 3px;
+  background-color: #007bff;
+  border-radius: 50%;
+  display: inline-block;
+  /* Animation */
+  animation: dotFlashing 1.5s infinite linear;
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* ---------- */
+.modal-backdrop.show {
+  opacity: 0.3 !important;
+}
+.modal-content {
+  background: #f8f9fa;
+  border-radius: 15px;
+  overflow: hidden;
+  color: #333;
+}
+.modal-header {
+  background: #fff;
+  color: #333;
+  border-bottom: none;
+  text-align: center;
+}
+.modal-header h4 {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+.modal-body {
+  padding: 2rem;
+}
+.form-control, .form-select {
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  color: #495057;
+}
+.form-control::placeholder, .form-select::placeholder {
+  color: #6c757d;
+}
+.form-control:focus, .form-select:focus {
+  background-color: #fff;
+  border-color: #80bdff;
+  box-shadow: none;
+}
+.btn-primary {
+  background-color: #4e54c8;
+  border: none;
+}
+.btn-primary:hover {
+  background-color: #3b3f9e;
+}
+.btn-close {
+  background-color: white;
+}
+.info-section {
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.info-section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.info-section p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+.info-section .icon-text {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.info-section .icon-text i {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+  color: #4e54c8;
+}
+.info-section .icon-text p {
+  margin: 0;
+}
+@keyframes dotFlashing {
+  0% {
+      opacity: 0;
+  }
+
+  50% {
+      opacity: 1;
+  }
+
+  100% {
+      opacity: 0;
+  }
+}
+
+.modal-footer .btn img {
+  margin-right: 8px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.message ol {
+  padding-left: 20px; /* Indent items */
+  margin: 0; /* Remove default margin */
+}
+
+.message li {
+  margin-bottom: 5px; /* Space between items */
 }

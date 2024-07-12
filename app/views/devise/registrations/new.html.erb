@@ -1,31 +1,8 @@
 <div class="form-wrapperup">
-  <% if resource.errors.any? %>
-    <div class="error_cont">
-      <div id="error_explanation" data-turbo-cache="false">
-        <h2>
-          <%= I18n.t("errors.messages.not_saved",
-                    count: resource.errors.count,
-                    resource: resource.class.model_name.human.downcase)
-          %>
-        </h2>
-        <ul>
-          <% resource.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-
+  <%= render "devise/shared/error_messages", resource: resource %>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'needs-validation', novalidate: true }) do |f| %>
+    <!-- Rest of your form code -->
     <h1>Create Your Account</h1>
-    <div class="social-icons">
-      <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-      <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-      <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-      <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
-    </div>
-    <span>or use your email for registration</span>
     <div class="row mb-3">
       <div class="col">
         <%= f.text_field :fname, placeholder: "First Name", class: "form-control", required: true %>
@@ -69,6 +46,13 @@
     </div>
     <%= f.select :gender, options_for_select([['Male', 'male'], ['Female', 'female'], ['Other', 'other']]), { include_blank: 'Gender' }, class: 'form-control mb-3', required: true %>
     <%= f.text_area :medical_history, placeholder: "Medical History", rows: 4, class: "form-control mb-3", required: true %>
+    
+    <% if flash[:alert] %>
+    <div class="alert alert-warning">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+    
     <div class="actions">
       <%= f.submit "SIGN UP", class: "btn btn-primary" %>
     </div>

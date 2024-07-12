@@ -161,79 +161,47 @@
 }
 
 /* ---------- */
-.modal-backdrop.show {
-  opacity: 0.3 !important;
+/* Modal Background */
+/* main.css */
+
+/* Custom backdrop for modals */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.70) !important; /* Adjust the color and opacity */
 }
-.modal-content {
-  background: #f8f9fa;
-  border-radius: 15px;
-  overflow: hidden;
-  color: #333;
+
+/* Additional custom modal styles */
+.modal-custom-width .modal-dialog {
+  max-width: 80%; /* Adjust the width as needed */
 }
+
 .modal-header {
-  background: #fff;
-  color: #333;
-  border-bottom: none;
-  text-align: center;
+  background-color: #021529; /* Dark header background */
+  color: #fff; /* Header text color */
 }
-.modal-header h4 {
-  font-size: 1.75rem;
-  font-weight: bold;
-}
+
 .modal-body {
-  padding: 2rem;
+  background-color: #f8f9fa; /* Light body background */
 }
-.form-control, .form-select {
-  background-color: #fff;
-  border: 1px solid #ced4da;
-  color: #495057;
+
+.modal-footer {
+  background-color: #343a40; /* Dark footer background */
+  color: #fff; /* Footer text color */
 }
-.form-control::placeholder, .form-select::placeholder {
-  color: #6c757d;
+
+.custom-close-btn {
+  filter: invert(1);
 }
-.form-control:focus, .form-select:focus {
-  background-color: #fff;
-  border-color: #80bdff;
-  box-shadow: none;
+
+.custom-close-btn:hover,
+.custom-close-btn:focus {
+  filter: invert(1);
+  opacity: 1;
 }
-.btn-primary {
-  background-color: #4e54c8;
-  border: none;
-}
-.btn-primary:hover {
-  background-color: #3b3f9e;
-}
-.btn-close {
-  background-color: white;
-}
-.info-section {
-  padding: 2rem;
-  background-color: #fff;
-  border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.info-section h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-.info-section p {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-}
-.info-section .icon-text {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-.info-section .icon-text i {
-  font-size: 1.5rem;
-  margin-right: 0.5rem;
-  color: #4e54c8;
-}
-.info-section .icon-text p {
-  margin: 0;
-}
+
+
+
+
+
 @keyframes dotFlashing {
   0% {
       opacity: 0;
